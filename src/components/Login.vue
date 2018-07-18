@@ -18,6 +18,7 @@
                                       color="black"
                                       append-icon="person"
                                       label="学号 username"
+                                      mask="#########"
                                       type="text" solo hide-details>
                         </v-text-field>
                       </v-flex>
@@ -37,11 +38,21 @@
                         <v-text-field v-model="loginData.code"
                                       color="black"
                                       label="验证码 Verification code"
+                                      mask="nnnn"
                                       type="text" solo hide-details>
                         </v-text-field>
                       </v-flex>
-                      <v-flex xs4>
-                        <img id="code-image" src="https://cas.nju.edu.cn/cas/codeimage"/>
+                      <v-flex xs4 @click.stop="changeCode">
+                        <img id="code-image" ref="codeImage" src="https://cas.nju.edu.cn/cas/codeimage"/>
+                      </v-flex>
+                    </v-layout>
+                    <v-layout>
+                      <v-flex xs12>
+                        <v-btn @click="login"
+                               style="background-color: #90138b"
+                               depressed block>
+                          <span class="white--text">登录</span>
+                        </v-btn>
                       </v-flex>
                     </v-layout>
                   </v-container>
@@ -52,21 +63,16 @@
         </div>
       </v-container>
     </v-content>
-    <v-footer style="background-color: #6A005F" :height="footerHeight">
-      <v-layout row wrap align-center>
-        <v-flex xs12 text-xs-center>
-          <div class="white--text ml-3">
-            Made By 161250102
-          </div>
-        </v-flex>
-      </v-layout>
-    </v-footer>
+    <my-footer :footer-height="footerHeight"></my-footer>
   </v-app>
 </template>
 
 <script>
+  import bus from '@/eventBus'
+  import myFooter from './Footer'
   export default {
     name: "Login",
+    components: {myFooter},
     data() {
       return {
         navHeight: 70,
@@ -76,6 +82,23 @@
           key:'',
           code: '',
         },
+      }
+    },
+    methods: {
+      changeCode() {
+        this.$refs.codeImage.src = "https://cas.nju.edu.cn/cas/codeimage?" + Math.floor(Math.random()*100);
+      },
+      login() {
+        this.$http.post('/login', this.loginData)
+          .then((response) => {
+            let info = response.data;
+            if (info.length === 0) {
+              bus.$emit('show-info', "登录失败")
+            } else {
+              sessionStorage.setItem('loginResult', info);
+              this.$router.push('/main');
+            }
+          })
       }
     },
     mounted() {
