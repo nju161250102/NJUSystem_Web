@@ -71,12 +71,12 @@
       }
     },
     mounted() {
-      this.$http.get('/personInfo')
+      this.$http.get('/personInfo/')
         .then((response) => {
           this.student = response.data;
         });
       let loginResult = sessionStorage.getItem("loginResult");
-      if (loginResult.indexOf("cas_success") >= 0) this.items.push(this.cardItem);
+      if (loginResult.indexOf("cer_success") >= 0) this.items.push(this.cardItem);
     }
   }
 </script>

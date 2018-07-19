@@ -43,7 +43,7 @@
                         </v-text-field>
                       </v-flex>
                       <v-flex xs4 @click.stop="changeCode">
-                        <img id="code-image" ref="codeImage" src="https://cas.nju.edu.cn/cas/codeimage"/>
+                        <img id="code-image" ref="codeImage" src="/api/login/cer_code"/>
                       </v-flex>
                     </v-layout>
                     <v-layout>
@@ -86,17 +86,17 @@
     },
     methods: {
       changeCode() {
-        this.$refs.codeImage.src = "https://cas.nju.edu.cn/cas/codeimage?" + Math.floor(Math.random()*100);
+        this.$refs.codeImage.src = "/api/login/cer_code?" + Math.floor(Math.random()*100);
       },
       login() {
-        this.$http.post('/login', this.loginData)
+        this.$http.post('/login/', this.loginData)
           .then((response) => {
             let info = response.data;
             if (info.length === 0) {
               bus.$emit('show-info', "登录失败")
             } else {
               sessionStorage.setItem('loginResult', info);
-              this.$router.push('/main');
+              this.$router.push('/main/');
             }
           })
       }
