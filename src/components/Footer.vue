@@ -1,5 +1,5 @@
 <template>
-  <v-footer style="background-color: #6A005F" :height="footerHeight">
+  <v-footer style="background-color: #6A005F" :height="footerHeight" app>
     <v-layout row wrap align-center>
       <v-flex xs12 text-xs-center>
         <div class="white--text ml-3">

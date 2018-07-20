@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <v-toolbar style="background-color: #6A005F">
+    <v-toolbar style="background-color: #6A005F" clipped-left app>
       <v-toolbar-title class="white--text headline">学生综合服务平台</v-toolbar-title>
     </v-toolbar>
-    <v-navigation-drawer permanent width="250">
+    <v-navigation-drawer width="250" clipped permanent app>
       <v-list>
         <v-list-tile avatar>
           <v-list-tile-content>
@@ -23,7 +23,7 @@
           </v-list-tile>
           <v-list-tile v-for="subItem in item.items"
             :key="subItem.title"
-            @click="">
+            @click="goto(subItem.path)">
             <v-list-tile-content>
               <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
             </v-list-tile-content>
@@ -54,12 +54,14 @@
           title: '校园一卡通',
           items: [
             {
-              title: '基本信息',
+              title: '个人信息',
               action: 'account_box',
+              path: '/cardInfo'
             },
             {
               title: '明细查询',
               action: 'description',
+              path: '/cardRecord'
             },
             {
               title: '每月账单',
@@ -68,6 +70,11 @@
           ]
         },
         student: {}
+      }
+    },
+    methods: {
+      goto(path) {
+        this.$router.push(path);
       }
     },
     mounted() {
