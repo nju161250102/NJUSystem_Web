@@ -27,18 +27,22 @@ router.get('/card/info', (req, res) => {
   })
 });
 router.get('/card/record', (req, res) => {
-  res.json([
-    {"transTime":"17-05-17 11:59","transName":"POS消费","amount":"-6.5","balance":10.3,"termName":"食堂小炒1"},
-    {"transTime":"17-05-17 07:43","transName":"POS消费","amount":"-2.0","balance":16.8,"termName":"精品早点1"},
-    {"transTime":"17-05-17 07:35","transName":"网费充值","amount":"-1.0","balance":18.8,"termName":"A区多媒体机"},
-    {"transTime":"17-05-16 18:17","transName":"网费充值","amount":"-1.0","balance":19.8,"termName":"图书馆多媒体机"},
-    {"transTime":"17-05-16 17:35","transName":"POS消费","amount":"-4.0","balance":20.8,"termName":"精品早点3"},
-    {"transTime":"17-05-16 17:08","transName":"POS消费","amount":"-1.57","balance":24.8,"termName":"南京10幢浴室"},
-    {"transTime":"17-05-16 16:44","transName":"圈存转账","amount":"+8.0","balance":26.37,"termName":"A区多媒体机"},
-    {"transTime":"17-05-15 18:17","transName":"网费充值","amount":"-1.0","balance":19.8,"termName":"图书馆多媒体机"},
-    {"transTime":"17-05-15 17:35","transName":"POS消费","amount":"-4.0","balance":20.8,"termName":"精品早点3"},
-    {"transTime":"17-05-15 17:08","transName":"POS消费","amount":"-1.57","balance":24.8,"termName":"南京10幢浴室"},
-    {"transTime":"17-05-15 16:44","transName":"圈存转账","amount":"+8.0","balance":26.37,"termName":"A区多媒体机"}
-    ])
+  res.json({
+    details: [
+      {"transTime":"17-05-17 11:59","transName":"POS消费","amount":"-6.5","balance":10.3,"termName":"食堂小炒1"},
+      {"transTime":"17-05-17 07:43","transName":"POS消费","amount":"-2.0","balance":16.8,"termName":"精品早点1"},
+      {"transTime":"17-05-17 07:35","transName":"网费充值","amount":"-1.0","balance":18.8,"termName":"A区多媒体机"},
+      {"transTime":"17-05-16 18:17","transName":"网费充值","amount":"-1.0","balance":19.8,"termName":"图书馆多媒体机"},
+      {"transTime":"17-05-16 17:35","transName":"POS消费","amount":"-4.0","balance":20.8,"termName":"精品早点3"},
+      {"transTime":"17-05-16 17:08","transName":"POS消费","amount":"-1.57","balance":24.8,"termName":"南京10幢浴室"},
+      {"transTime":"17-05-16 16:44","transName":"圈存转账","amount":"+8.0","balance":26.37,"termName":"A区多媒体机"},
+      {"transTime":"17-05-15 18:17","transName":"网费充值","amount":"-1.0","balance":19.8,"termName":"图书馆多媒体机"},
+      {"transTime":"17-05-15 17:35","transName":"POS消费","amount":"-4.0","balance":20.8,"termName":"精品早点3"},
+      {"transTime":"17-05-15 17:08","transName":"POS消费","amount":"-1.57","balance":24.8,"termName":"南京10幢浴室"},
+      {"transTime":"17-05-15 16:44","transName":"圈存转账","amount":"+8.0","balance":26.37,"termName":"A区多媒体机"}],
+    daily: [6.5, 8.9, 11.4, 12, 13, 10.6, 9.7, 10, 7, 8.5, 11.9],
+    income: 100,
+    expense: 450,
+  })
 });
 module.exports = router;
