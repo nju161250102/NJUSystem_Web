@@ -80,7 +80,8 @@
       </template>
     </v-data-table>
     <div class="text-xs-right pt-1">
-      <v-pagination v-model="pagination.page" :length="pages" :total-visible="6" align="right"></v-pagination>
+      <span>转入金额总计：{{income}}，消费金额总计：{{expense}}</span>
+      <v-pagination v-model="pagination.page" :length="pages" :total-visible="6"></v-pagination>
     </div>
   </div>
 </template>
@@ -96,6 +97,8 @@
         startMenu: false,
         endDate: null,
         endMenu: false,
+        income: 0,
+        expense: 0,
         headers: [
           { text: '时间', value: 'transTime', align: 'center'},
           { text: '金额变动', value: 'amount', align: 'center', sortable: false},
@@ -127,7 +130,9 @@
         } else {
           this.$http.get('/card/record?from=' + this.startDate + '&to=' + this.endDate)
             .then((response) => {
-              this.items = response.data;
+              this.items = response.data.details;
+              this.income = response.data.income;
+              this.expense = response.data.expense;
             })
             .catch((response) => {
               bus.$emit('show-info', "服务器错误："+response.status);
